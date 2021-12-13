@@ -36,82 +36,82 @@ namespace Unity.XR.OpenVR
 
         public static void RegisterInputLayouts()
         {
-            InputSystem.RegisterLayout<XRHMD>("OpenVRHMD",
+            InputSystem.RegisterLayout<XRHMD>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithProduct(@"^(OpenVR Headset)|^(Vive Pro)")
             );
 
-            InputSystem.RegisterLayout<XRController>("OpenVRControllerWMR",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithProduct(@"^(OpenVR Controller\(WindowsMR)")
             );
 
-            InputSystem.RegisterLayout<XRController>("ViveWand",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Controller\(((Vive Controller)|(VIVE Controller)))")
             );
 
-            InputSystem.RegisterLayout<XRController>("OpenVRViveCosmosController",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Controller\(((VIVE Cosmos Controller)|(Vive Cosmos Controller)|(vive_cosmos_controller)))")
             );
 
-            InputSystem.RegisterLayout<XRController>("OpenVRControllerIndex",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("Valve")
                     .WithProduct(@"^(OpenVR Controller\(Knuckles)")
             );
 
-            InputSystem.RegisterLayout<XRController>("OpenVROculusTouchController",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("Oculus")
                     .WithProduct(@"^(OpenVR Controller\(Oculus)")
             );
 
-            InputSystem.RegisterLayout<XRController>("HandedViveTracker",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Controller\(((Vive Tracker)|(VIVE Tracker)).+ - ((Left)|(Right)))")
             );
 
-            InputSystem.RegisterLayout<XRController>("ViveTracker",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Controller\(((Vive Tracker)|(VIVE Tracker)).+\)(?! - Left| - Right))")
             );
 
-            InputSystem.RegisterLayout<XRController>("ViveTracker",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Tracked Device\(((Vive Tracker)|(VIVE Tracker)).+\)(?! - Left| - Right))")
             );
 
-            InputSystem.RegisterLayout<XRController>("LogitechStylus",
+            InputSystem.RegisterLayout<XRController>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("Logitech")
                     .WithProduct(@"(OpenVR Controller\(.+stylus)")
             );
 
-            InputSystem.RegisterLayout<TrackedDevice>("ViveLighthouse",
+            InputSystem.RegisterLayout<TrackedDevice>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("HTC")
                     .WithProduct(@"^(OpenVR Tracking Reference\()")
             );
 
-            InputSystem.RegisterLayout<TrackedDevice>("ValveLighthouse",
+            InputSystem.RegisterLayout<TrackedDevice>(
                 matches: new InputDeviceMatcher()
                     .WithInterface(XRUtilities.InterfaceMatchAnyVersion)
                     .WithManufacturer("Valve Corporation")
@@ -128,7 +128,7 @@ namespace Unity.XR.OpenVR
     {
         private static List<XRDisplaySubsystemDescriptor> s_DisplaySubsystemDescriptors = new List<XRDisplaySubsystemDescriptor>();
         private static List<XRInputSubsystemDescriptor> s_InputSubsystemDescriptors = new List<XRInputSubsystemDescriptor>();
-        
+
 
         public XRDisplaySubsystem displaySubsystem
         {
@@ -182,10 +182,10 @@ namespace Unity.XR.OpenVR
 
                 userDefinedSettings.actionManifestPath = settings.ActionManifestFileRelativeFilePath;
 
-                SetUserDefinedSettings(userDefinedSettings); 
+                SetUserDefinedSettings(userDefinedSettings);
             }
 #endif
-            
+
             CreateSubsystem<XRDisplaySubsystemDescriptor, XRDisplaySubsystem>(s_DisplaySubsystemDescriptors, "OpenVR Display");
 
             EVRInitError result = GetInitializationResult();
@@ -370,12 +370,12 @@ namespace Unity.XR.OpenVR
 
                             Debug.Log("<b>[OpenVR]</b> Mirror View Mode changed via file to: " + mode.ToString());
                             OpenVRSettings.SetMirrorViewMode((ushort)mode); //bypass the local set.
-                            
+
                         }
                     }
                 }
             }
-            catch 
+            catch
             { }
         }
 
@@ -386,7 +386,7 @@ namespace Unity.XR.OpenVR
             running = false;
             CleanupTick();
             CleanupReloadWatcher();
-            DestroyMirrorModeWatcher();            
+            DestroyMirrorModeWatcher();
 
             StopSubsystem<XRInputSubsystem>();
             StopSubsystem<XRDisplaySubsystem>(); //display actually does vrshutdown
